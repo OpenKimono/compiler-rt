@@ -4,7 +4,7 @@ CXXFLAGS += -Wno-error
 
 LINK ?= $(COMPILER_HOME)/bin/llvm-link
 
-TOOLS := print_tool counter_tool code-coverage gprof_tool instrument_function prof_lite props_tool
+TOOLS := print_tool counter_tool code-coverage call-graph instrument_function prof_lite props_tool bb-counter
 OBJECTS := $(patsubst %,%.o,$(TOOLS))
 
 all: $(TOOLS)
