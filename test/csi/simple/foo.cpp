@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <inttypes.h>
+#include "bar.h"
 
 char global_char = 1;
 short global_short = 2;
@@ -37,9 +38,10 @@ int main(void) {
   } */
 
   // n = atoi(argv[1]);
-  foo(99);
-  foo2(100);
-  foo3(10);
+  foo(5);
+  foo2(2);
+  foo3(5);
+  printf("bar is %d\n", bar());
 
   return 0;
 }

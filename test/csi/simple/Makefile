@@ -15,7 +15,7 @@ $(TOOLKIT)/%.o: $(TOOLKIT)/%.c
 
 include ../common.mk
 
-EXTRA = -emit-llvm -fcsi -O3 -g
+EXTRA = -emit-llvm -fcsi -g
 CFLAGS += $(EXTRA)
 CXXFLAGS += $(EXTRA)
 
@@ -23,6 +23,7 @@ CXXFLAGS += $(EXTRA)
 # e.g. 'make foo TOOL=print_tool'
 TOOL ?= null_tool
 TOOL_OBJ = $(patsubst %,$(TOOLKIT)/%.o,$(TOOL))
+CSIRT_OBJ = ../csirt/csirt.o
 
 ifeq ($(TOOL), call-graph)
 LDFLAGS += `pkg-config --libs --cflags glib-2.0`
@@ -35,14 +36,17 @@ EXTRA += -fno-omit-frame-pointer
 LDFLAGS += -pg
 endif
 
-fib-serial: fib-serial.o $(TOOL_OBJ)
-foo: foo.o $(TOOL_OBJ)
-memops: memops.o $(TOOL_OBJ)
+fib-serial: fib-serial.o $(TOOL_OBJ) $(CSIRT_OBJ)
+foo: foo.o bar.o $(TOOL_OBJ) $(CSIRT_OBJ)
+memops: memops.o $(TOOL_OBJ) $(CSIRT_OBJ)
 
 fib-serial.o: fib-serial.cpp
-	$(CXX) -c $(EXTRA) $^ -o $@
+	$(CXX) -c -emit-llvm $(EXTRA) $^ -o $@
 
 foo.o: foo.cpp
+	$(CXX) -c $(EXTRA) $^ -o $@
+
+bar.o: bar.cpp
 	$(CXX) -c $(EXTRA) $^ -o $@
 
 memops.o: memops.cpp
