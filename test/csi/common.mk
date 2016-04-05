@@ -5,7 +5,7 @@
 TEST_MK_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 include $(TEST_MK_DIR)/myconfig.mk
 
-BASIC_CFLAGS = -g -O0 -W -Wall -Werror
+BASIC_CFLAGS = -g -O0 -W -Wall -Werror -Wno-unused-parameter
 BASIC_CXXFLAGS=$(BASIC_CFLAGS)
 CFLAGS = $(BASIC_CFLAGS) -std=c11 # -flto
 CXXFLAGS = $(BASIC_CXXFLAGS) -std=c++11 # -flto

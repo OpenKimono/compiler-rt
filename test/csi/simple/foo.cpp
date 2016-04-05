@@ -9,6 +9,7 @@ int global_uint = 4;
 uint64_t global = 8;
 
 void foo(int i) {
+    printf("inside foo1\n");
     global_char += (char) i;
     global_short += (short) i;
     global_uint += (unsigned int) i;
@@ -16,12 +17,13 @@ void foo(int i) {
 }
 
 void foo2(int i) {
+    printf("inside foo2(%d)\n", i);
     for (int j = 0; j < i; j++)
         global_char++;
-    printf("inside foo2(%d)\n", i);
 }
 
 void foo3(int n) {
+    printf("inside foo3\n");
     // for (int i = 0; i < n; i++)
         // foo(i);
 }

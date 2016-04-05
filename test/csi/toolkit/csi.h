@@ -17,25 +17,44 @@
 // API function signatures
 EXTERN_C
 
-WEAK void __csi_init(const char * const name,
-                     const uint32_t num_units);
+WEAK void __csi_init(const char * const name);
+
 WEAK void __csi_unit_init(const char * const file_name,
-                          const uint64_t num_basic_blocks);
+                          const uint64_t num_inst);
 
-WEAK void __csi_before_load(const void *addr, const uint32_t num_bytes, const uint64_t prop);
-WEAK void __csi_after_load(const void *addr, const uint32_t num_bytes, const uint64_t prop);
-WEAK void __csi_before_store(const void *addr, const uint32_t num_bytes, const uint64_t prop);
-WEAK void __csi_after_store(const void *addr, const uint32_t num_bytes, const uint64_t prop);
+WEAK void __csi_before_load(const uint64_t csi_id,
+                            const void *addr,
+                            const uint32_t num_bytes,
+                            const uint64_t prop);
 
-WEAK void __csi_func_entry(const void * const function,
+WEAK void __csi_after_load(const uint64_t csi_id,
+                           const void *addr,
+                           const uint32_t num_bytes,
+                           const uint64_t prop);
+
+WEAK void __csi_before_store(const uint64_t csi_id,
+                             const void *addr,
+                             const uint32_t num_bytes,
+                             const uint64_t prop);
+
+WEAK void __csi_after_store(const uint64_t csi_id,
+                            const void *addr,
+                            const uint32_t num_bytes,
+                            const uint64_t prop);
+
+WEAK void __csi_func_entry(const uint64_t csi_id,
+                           const void * const function,
                            const void * const return_addr,
                            const char * const func_name);
-WEAK void __csi_func_exit(const void * const function,
+
+WEAK void __csi_func_exit(const uint64_t csi_id,
+                          const void * const function,
                           const void * const return_addr,
                           const char * const func_name);
 
-WEAK void __csi_bb_entry(const uint64_t bb_id);
-WEAK void __csi_bb_exit(const uint64_t bb_id);
+WEAK void __csi_bb_entry(const uint64_t csi_id);
+
+WEAK void __csi_bb_exit(const uint64_t csi_id);
 
 EXTERN_C_END
 

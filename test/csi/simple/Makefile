@@ -13,6 +13,9 @@ $(TOOLKIT)/%.o: $(TOOLKIT)/%.cpp
 $(TOOLKIT)/%.o: $(TOOLKIT)/%.c
 	make -C $(TOOLKIT) $*
 
+../csirt/csirt.o: ../csirt/csirt.c
+	make -C ../csirt $*
+
 include ../common.mk
 
 EXTRA = -emit-llvm -fcsi -g
