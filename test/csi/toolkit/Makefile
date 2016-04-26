@@ -7,6 +7,9 @@ LINK ?= $(COMPILER_HOME)/bin/llvm-link
 TOOLS := print_tool counter_tool code-coverage instrument_function prof_lite props_tool bb-counter fed_test
 OBJECTS := $(patsubst %,%.o,$(TOOLS))
 
+null_tool.o: null_tool.cpp
+	$(CXX) -O3 -c -emit-llvm $< -o $@
+
 all: $(TOOLS) callgraph.o
 
 cilkprof.o: null_tool.o cilkprof/
