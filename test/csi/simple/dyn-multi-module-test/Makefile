@@ -22,19 +22,19 @@ OBJECTS=a.o libb.so
 default: main
 
 main: main.o $(CSIRT_OBJ) $(OBJECTS) $(TOOL_OBJ)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -fcsi -flto $(COV_FLAGS) $^ -o $@ -L. -lb
+	$(CXX) -g $(CXXFLAGS) $(LDFLAGS) -fcsi -flto $(COV_FLAGS) $^ -o $@ -L. -lb
 
 %.o: %.cpp
-	$(CXX) -c $(EXTRA) $(COV_FLAGS) -fcsi -emit-llvm $^ -o $@
+	$(CXX) -c -g $(EXTRA) $(COV_FLAGS) -fcsi -emit-llvm $^ -o $@
 
 b.o: b.cpp
-	$(CXX) -c $(EXTRA) -fPIC $(COV_FLAGS) -fcsi -emit-llvm $^ -o $@
+	$(CXX) -c -g $(EXTRA) -fPIC $(COV_FLAGS) -fcsi -emit-llvm $^ -o $@
 
 libb.so: b.o $(TOOL_OBJ)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(EXTRA) -fcsi -flto -shared -o $@ $^
+	$(CXX) -g $(CXXFLAGS) $(LDFLAGS) $(EXTRA) -fcsi -flto -shared -o $@ $^
 
 main.o: main.cpp
-	$(CXX) -c $(EXTRA) -fcsi -emit-llvm $(COV_FLAGS) $^ -o $@
+	$(CXX) -c -g $(EXTRA) -fcsi -emit-llvm $(COV_FLAGS) $^ -o $@
 
 clean:
 	rm -f main *.o

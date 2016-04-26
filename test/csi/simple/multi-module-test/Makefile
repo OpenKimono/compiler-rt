@@ -15,18 +15,18 @@ COV_FLAGS=
 
 include ../../common.mk
 
-OBJECTS=a.o b.o
+OBJECTS=a.o b.o ../../csirt/csirt.o
 
 default: main
 
 main: main.o $(OBJECTS) $(TOOL_OBJ)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -flto $(COV_FLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -g -flto $(COV_FLAGS) $^ -o $@
 
 %.o: %.cpp
-	$(CXX) -c $(EXTRA) -fcsi -emit-llvm $(COV_FLAGS) $^ -o $@
+	$(CXX) -c $(EXTRA) -fcsi -g -emit-llvm $(COV_FLAGS) $^ -o $@
 
 main.o: main.cpp
-	$(CXX) -c $(EXTRA) -fcsi -emit-llvm $(COV_FLAGS) $^ -o $@
+	$(CXX) -c $(EXTRA) -fcsi -g -emit-llvm $(COV_FLAGS) $^ -o $@
 
 clean:
 	rm -f main *.o
