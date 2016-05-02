@@ -4,6 +4,7 @@
 
 #include "a.h"
 #include "b.h"
+#include "lib.h"
 
 int c() {
     printf("In c.\n");
@@ -22,7 +23,7 @@ int main() {
     int result = 0;
 
     printf("In main.\n");
-    result += a() + b() + c();
+    result += a() + b() + c() + lib();
     if (r < RAND_MAX/2) {
         result += d();
     }
