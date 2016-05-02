@@ -67,3 +67,13 @@ void __csi_bb_entry(const uint64_t csi_id) {
 void __csi_bb_exit(const uint64_t csi_id) {
     print_call("__csi_bb_exit", csi_id);
 }
+
+void __csi_before_callsite(uint64_t csi_id, uint64_t func_id) {
+    print_call("__csi_before_callsite", csi_id);
+    if (__csirt_callsite_target_unknown(csi_id, func_id)) {
+        printf("  (unknown target)\n");
+    } else {
+        printf("  target: %s:%d\n", __csirt_get_filename(func_id),
+               __csirt_get_line_number(func_id));
+    }
+}

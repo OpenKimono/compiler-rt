@@ -56,6 +56,8 @@ WEAK void __csi_bb_entry(const uint64_t csi_id);
 
 WEAK void __csi_bb_exit(const uint64_t csi_id);
 
+WEAK void __csi_before_callsite(uint64_t csi_id, uint64_t func_id);
+
 EXTERN_C_END
 
 #endif

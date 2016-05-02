@@ -24,6 +24,8 @@ WEAK void __csi_func_exit(const uint64_t csi_id,
 WEAK void __csi_bb_entry(const uint64_t csi_id) {}
 WEAK void __csi_bb_exit(const uint64_t csi_id) {}
 
+WEAK void __csi_before_callsite(uint64_t csi_id, uint64_t func_id) {}
+
 /* // WEAK void __csi_init(csi_info_t info) {}
 // WEAK void __csi_module_init(csi_module_info_t info) {}
 WEAK void __csi_init(uint32_t num_modules) {}

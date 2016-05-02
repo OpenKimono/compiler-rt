@@ -92,4 +92,8 @@ int32_t __csirt_get_line_number(const uint64_t csi_id) {
     return get_fed_entry(csi_id)->line_number;
 }
 
+bool __csirt_callsite_target_unknown(uint64_t csi_id, uint64_t func_id) {
+    return func_id == 0xffffffffffffffff;
+}
+
 EXTERN_C_END
